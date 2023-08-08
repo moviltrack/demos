@@ -1,6 +1,5 @@
-{
 	"info": {
-		"_postman_id": "fcec7357-6e4a-49c5-a2b3-6505d047f36e",
+		"_postman_id": "8c3735bf-4cac-46b9-bd82-affe99313b14",
 		"name": "Impinj Reader Rotoplas",
 		"description": "This API provides an interface for configuring RFID operations and reporting\nstreams on Impinj Readers as well as updating Impinj Reader firmware and\nconfiguring system settings.\n\nWhen retrieved from a reader, this OpenAPI Document is dynamically updated\nbased on the capabilities of the reader. See the '/openapi.json' path.\n\n\nContact Support:\n Name: Impinj Developer Platform\n Email: developer-feedback@impinj.com",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -2097,6 +2096,213 @@
 							],
 							"cookie": [],
 							"body": "{\n  \"productModel\": \"<string>\",\n  \"manufacturer\": \"<string>\",\n  \"productDescription\": \"<string>\",\n  \"productSku\": \"<string>\",\n  \"productHla\": \"<string>\",\n  \"pcba\": \"<string>\",\n  \"serialNumber\": \"<string>\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "webhooks",
+			"item": [
+				{
+					"name": "event",
+					"item": [
+						{
+							"name": "Get the event webhook configuration.",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/webhooks/event",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"webhooks",
+										"event"
+									]
+								},
+								"description": "Gets the event webhook configuration."
+							},
+							"response": [
+								{
+									"name": "OK.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/webhooks/event",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"webhooks",
+												"event"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"active\": false,\n  \"serverConfiguration\": {\n    \"url\": \"http://m\",\n    \"port\": \"<integer>\",\n    \"authentication\": {\n      \"username\": \"<string>\",\n      \"password\": \"<string>\"\n    },\n    \"tls\": {}\n  },\n  \"retry\": {},\n  \"eventBatchLimit\": 10000,\n  \"eventBatchLingerMilliseconds\": 1000,\n  \"eventBufferSize\": 100000\n}"
+								}
+							]
+						},
+						{
+							"name": "Set the event webhook configuration.",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"active\": false,\n    \"serverConfiguration\": {\n        \"url\": \"https://webhook.site/f38e259d-331e-4b11-badd-5857fb5720dd\",\n        \"port\": 443,\n        \"tls\": {\n            \"verifyServer\": false\n        }\n    },\n    \"retry\": {\n        \"enabled\": true\n    }\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/webhooks/event",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"webhooks",
+										"event"
+									]
+								},
+								"description": "Sets the event webhook configuration."
+							},
+							"response": [
+								{
+									"name": "No Content. Configuration saved successfully.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"active\": false,\n  \"serverConfiguration\": {\n    \"url\": \"http://m\",\n    \"port\": \"<integer>\",\n    \"authentication\": {\n      \"username\": \"<string>\",\n      \"password\": \"<string>\"\n    },\n    \"tls\": {}\n  },\n  \"retry\": {},\n  \"eventBatchLimit\": 10000,\n  \"eventBatchLingerMilliseconds\": 1000,\n  \"eventBufferSize\": 100000\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/webhooks/event",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"webhooks",
+												"event"
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad request. Configuration is invalid.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"active\": false,\n  \"serverConfiguration\": {\n    \"url\": \"http://m\",\n    \"port\": \"<integer>\",\n    \"authentication\": {\n      \"username\": \"<string>\",\n      \"password\": \"<string>\"\n    },\n    \"tls\": {}\n  },\n  \"retry\": {},\n  \"eventBatchLimit\": 10000,\n  \"eventBatchLingerMilliseconds\": 1000,\n  \"eventBufferSize\": 100000\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/webhooks/event",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"webhooks",
+												"event"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"<string>\",\n  \"invalidPropertyId\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+								}
+							]
 						}
 					]
 				}

@@ -59,7 +59,7 @@ Se anexan 2 collecciones de postman, la llamada ```Impinj Reader Rotoplas.postma
 
 La collecion  ```Impinj Reader Configuration REST API.postman_collection``` incluye todos los metodos disponibles para el lector.
 
-la ruta ```http://lector/api/v1/openapi.json``` es la ruta para obtener la documentacion de la api del lector, si usan algun producto automatizado para generar el cliente de la api, esta es la ruta que deben usar.
+La ruta ```http://[lector]/api/v1/openapi.json``` es la ruta para obtener la documentacion de la api del lector esta estandarizada con openapi 3.0, si usan algun producto automatizado para generar el cliente de la api como swagger, esta es la ruta que deben usar.
 
 El lector requiere authenticacion basica, el usuario y contraseña son los mismos que se usan para acceder al lector por medio del navegador.
 
@@ -113,3 +113,11 @@ Este es un ejemplo de como llegan los datos. Es un arreglo de objetos json donde
 ````
 
 ## En el siguente video se muestra como usar la colleción de postman para iniciar y detener el servicio.
+
+[https://youtu.be/Nu_nrxj5Go4](https://youtu.be/Nu_nrxj5Go4)
+
+
+## Documentación del lector
+
+[https://platform.impinj.com/site/docs/reader_api_welcome/index.gsp#](https://platform.impinj.com/site/docs/reader_api_welcome/index.gsp#)
+
