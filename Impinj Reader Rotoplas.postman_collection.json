@@ -1,0 +1,2127 @@
+{
+	"info": {
+		"_postman_id": "fcec7357-6e4a-49c5-a2b3-6505d047f36e",
+		"name": "Impinj Reader Rotoplas",
+		"description": "This API provides an interface for configuring RFID operations and reporting\nstreams on Impinj Readers as well as updating Impinj Reader firmware and\nconfiguring system settings.\n\nWhen retrieved from a reader, this OpenAPI Document is dynamically updated\nbased on the capabilities of the reader. See the '/openapi.json' path.\n\n\nContact Support:\n Name: Impinj Developer Platform\n Email: developer-feedback@impinj.com",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4161768"
+	},
+	"item": [
+		{
+			"name": "openapi.json",
+			"item": [
+				{
+					"name": "Get OpenAPI Document",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/openapi.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"openapi.json"
+							]
+						},
+						"description": "Retrieve the OpenAPI Document for this Reader. The document describes the API using\nreader-specific capabilities and constraints, such as region-specific transmit power limits\nand supported RF Modes. It also includes definitions and paths associated with all\nregistered profiles. If the IoT Interface is disabled, this will only contain system\nendpoints.\n"
+					},
+					"response": [
+						{
+							"name": "OK.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: basic",
+										"key": "Authorization",
+										"value": "Basic <credentials>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/openapi.json",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"openapi.json"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "status",
+			"item": [
+				{
+					"name": "Retrieve status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/status",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"status"
+							]
+						},
+						"description": "Retrieves the reader's current status.\nThis endpoint allow's a user to query what the reader is actively working on, if anything. The information\ncontained here will indicate the last request the reader responded to that resulted in it taking some modem\naction, such as starting or stopping inventory. Configuration API calls are not included.\n"
+					},
+					"response": [
+						{
+							"name": "OK.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: basic",
+										"key": "Authorization",
+										"value": "Basic <credentials>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/status",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"status"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"activePreset\": {\n    \"id\": \"_n\",\n    \"profile\": \"<string>\"\n  },\n  \"status\": \"running\",\n  \"time\": \"<dateTime>\",\n  \"serialNumber\": \"<string>\",\n  \"mqttBrokerConnectionStatus\": \"connected\",\n  \"mqttTlsAuthentication\": \"server\",\n  \"kafkaClusterConnectionStatus\": \"connected\",\n  \"eventWebhookStatus\": {\n    \"status\": \"network-error\",\n    \"httpStatusCode\": \"<integer>\",\n    \"timestamp\": \"<dateTime>\"\n  }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "profiles",
+			"item": [
+				{
+					"name": "stop",
+					"item": [
+						{
+							"name": "Stop preset",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/profiles/stop",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"profiles",
+										"stop"
+									]
+								},
+								"description": "Stops the currently running profile preset.\nIf no preset is currently running, this is a no-op.\n"
+							},
+							"response": [
+								{
+									"name": "No Content.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/profiles/stop",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"profiles",
+												"stop"
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "inventory",
+					"item": [
+						{
+							"name": "presets",
+							"item": [
+								{
+									"name": "{presetId}",
+									"item": [
+										{
+											"name": "start",
+											"item": [
+												{
+													"name": "Start inventory preset",
+													"request": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/profiles/inventory/presets/:presetId/start",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"profiles",
+																"inventory",
+																"presets",
+																":presetId",
+																"start"
+															],
+															"variable": [
+																{
+																	"key": "presetId",
+																	"value": "Rotoplas"
+																}
+															]
+														},
+														"description": "Starts running the specified inventory preset. The running preset cannot be\nreplaced or deleted. The preset will be automatically restarted if the reader\nreboots. If the reader is restarted multiple times in quick succcession the\nsaved preset may be stopped to prevent the bad preset from blocking access to\nthe rest interface. If this occurs an ERROR level message will be logged.\n"
+													},
+													"response": [
+														{
+															"name": "No Content. The profile was started.",
+															"originalRequest": {
+																"method": "POST",
+																"header": [
+																	{
+																		"description": "Added as a part of security scheme: basic",
+																		"key": "Authorization",
+																		"value": "Basic <credentials>"
+																	}
+																],
+																"url": {
+																	"raw": "{{baseUrl}}/profiles/inventory/presets/:presetId/start",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"profiles",
+																		"inventory",
+																		"presets",
+																		":presetId",
+																		"start"
+																	],
+																	"variable": [
+																		{
+																			"key": "presetId"
+																		}
+																	]
+																}
+															},
+															"status": "No Content",
+															"code": 204,
+															"_postman_previewlanguage": "text",
+															"header": [],
+															"cookie": [],
+															"body": ""
+														},
+														{
+															"name": "Bad request. The saved preset contains an invalid profile configuration.",
+															"originalRequest": {
+																"method": "POST",
+																"header": [
+																	{
+																		"key": "Accept",
+																		"value": "application/json"
+																	},
+																	{
+																		"description": "Added as a part of security scheme: basic",
+																		"key": "Authorization",
+																		"value": "Basic <credentials>"
+																	}
+																],
+																"url": {
+																	"raw": "{{baseUrl}}/profiles/inventory/presets/:presetId/start",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"profiles",
+																		"inventory",
+																		"presets",
+																		":presetId",
+																		"start"
+																	],
+																	"variable": [
+																		{
+																			"key": "presetId"
+																		}
+																	]
+																}
+															},
+															"status": "Bad Request",
+															"code": 400,
+															"_postman_previewlanguage": "json",
+															"header": [
+																{
+																	"key": "Content-Type",
+																	"value": "application/json"
+																}
+															],
+															"cookie": [],
+															"body": "{\n  \"message\": \"<string>\",\n  \"invalidPropertyId\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+														},
+														{
+															"name": "Not Found. The specified preset was not found on the system.",
+															"originalRequest": {
+																"method": "POST",
+																"header": [
+																	{
+																		"key": "Accept",
+																		"value": "application/json"
+																	},
+																	{
+																		"description": "Added as a part of security scheme: basic",
+																		"key": "Authorization",
+																		"value": "Basic <credentials>"
+																	}
+																],
+																"url": {
+																	"raw": "{{baseUrl}}/profiles/inventory/presets/:presetId/start",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"profiles",
+																		"inventory",
+																		"presets",
+																		":presetId",
+																		"start"
+																	],
+																	"variable": [
+																		{
+																			"key": "presetId"
+																		}
+																	]
+																}
+															},
+															"status": "Not Found",
+															"code": 404,
+															"_postman_previewlanguage": "json",
+															"header": [
+																{
+																	"key": "Content-Type",
+																	"value": "application/json"
+																}
+															],
+															"cookie": [],
+															"body": "{\n  \"message\": \"<string>\",\n  \"invalidPropertyId\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+														},
+														{
+															"name": "Conflict. Another operation is running on the reader.",
+															"originalRequest": {
+																"method": "POST",
+																"header": [
+																	{
+																		"key": "Accept",
+																		"value": "application/json"
+																	},
+																	{
+																		"description": "Added as a part of security scheme: basic",
+																		"key": "Authorization",
+																		"value": "Basic <credentials>"
+																	}
+																],
+																"url": {
+																	"raw": "{{baseUrl}}/profiles/inventory/presets/:presetId/start",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"profiles",
+																		"inventory",
+																		"presets",
+																		":presetId",
+																		"start"
+																	],
+																	"variable": [
+																		{
+																			"key": "presetId"
+																		}
+																	]
+																}
+															},
+															"status": "Conflict",
+															"code": 409,
+															"_postman_previewlanguage": "json",
+															"header": [
+																{
+																	"key": "Content-Type",
+																	"value": "application/json"
+																}
+															],
+															"cookie": [],
+															"body": "{\n  \"message\": \"<string>\",\n  \"invalidPropertyId\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+														}
+													]
+												}
+											]
+										},
+										{
+											"name": "Retrieve inventory preset detail",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/profiles/inventory/presets/:presetId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"profiles",
+														"inventory",
+														"presets",
+														":presetId"
+													],
+													"variable": [
+														{
+															"key": "presetId",
+															"value": "l6fi"
+														}
+													]
+												},
+												"description": "Retrieves the detailed configuration of the specified preset."
+											},
+											"response": [
+												{
+													"name": "OK.",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															},
+															{
+																"description": "Added as a part of security scheme: basic",
+																"key": "Authorization",
+																"value": "Basic <credentials>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/profiles/inventory/presets/:presetId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"profiles",
+																"inventory",
+																"presets",
+																":presetId"
+															],
+															"variable": [
+																{
+																	"key": "presetId"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"antennaConfigs\": [\n    {\n      \"antennaPort\": \"<integer>\",\n      \"transmitPowerCdbm\": \"<integer>\",\n      \"rfMode\": 2,\n      \"inventorySession\": \"<integer>\",\n      \"inventorySearchMode\": \"single-target-with-tagfocus\",\n      \"estimatedTagPopulation\": \"<integer>\",\n      \"antennaName\": \"uTCJVM-kIcZ\",\n      \"filtering\": {\n        \"filters\": [\n          {\n            \"action\": \"include\",\n            \"tagMemoryBank\": \"epc\",\n            \"bitOffset\": \"<integer>\",\n            \"mask\": \"adeECB596\",\n            \"maskLength\": \"<integer>\"\n          }\n        ],\n        \"filterLink\": \"union\",\n        \"filterVerification\": \"passive\"\n      },\n      \"powerSweeping\": {\n        \"minimumPowerCdbm\": \"<integer>\",\n        \"stepSizeCdb\": \"<integer>\"\n      },\n      \"fastId\": \"disabled\",\n      \"protectedModePinHex\": \"a2Bc6f15\",\n      \"receiveSensitivityDbm\": \"<integer>\",\n      \"tagAuthentication\": {\n        \"messageHex\": \"04C21F5F1EAB\"\n      },\n      \"tagMemoryReads\": [\n        {\n          \"memoryBank\": \"user\",\n          \"wordOffset\": \"<integer>\",\n          \"wordCount\": \"<integer>\"\n        }\n      ],\n      \"tagAccessPasswordHex\": \"694717A6\",\n      \"tagAccessPasswordWriteHex\": \"        \",\n      \"tagSecurityModesWrite\": {\n        \"protected\": false,\n        \"shortRange\": false\n      }\n    }\n  ],\n  \"eventConfig\": {},\n  \"startTriggers\": [\n    {\n      \"gpiTransitionEvent\": {\n        \"gpi\": \"<integer>\",\n        \"transition\": \"low-to-high\"\n      }\n    }\n  ],\n  \"stopTriggers\": [\n    {\n      \"gpiTransitionEvent\": {\n        \"gpi\": \"<integer>\",\n        \"transition\": \"low-to-high\"\n      }\n    }\n  ]\n}"
+												},
+												{
+													"name": "Not Found. The specified preset was not found on the system.",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															},
+															{
+																"description": "Added as a part of security scheme: basic",
+																"key": "Authorization",
+																"value": "Basic <credentials>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/profiles/inventory/presets/:presetId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"profiles",
+																"inventory",
+																"presets",
+																":presetId"
+															],
+															"variable": [
+																{
+																	"key": "presetId"
+																}
+															]
+														}
+													},
+													"status": "Not Found",
+													"code": 404,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"message\": \"<string>\",\n  \"invalidPropertyId\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+												}
+											]
+										},
+										{
+											"name": "Create or replace inventory preset",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"antennaConfigs\": [\n    {\n      \"antennaPort\": \"<integer>\",\n      \"transmitPowerCdbm\": \"<integer>\",\n      \"rfMode\": 2,\n      \"inventorySession\": \"<integer>\",\n      \"inventorySearchMode\": \"single-target-with-tagfocus\",\n      \"estimatedTagPopulation\": \"<integer>\",\n      \"antennaName\": \"uTCJVM-kIcZ\",\n      \"filtering\": {\n        \"filters\": [\n          {\n            \"action\": \"include\",\n            \"tagMemoryBank\": \"epc\",\n            \"bitOffset\": \"<integer>\",\n            \"mask\": \"adeECB596\",\n            \"maskLength\": \"<integer>\"\n          }\n        ],\n        \"filterLink\": \"union\",\n        \"filterVerification\": \"passive\"\n      },\n      \"powerSweeping\": {\n        \"minimumPowerCdbm\": \"<integer>\",\n        \"stepSizeCdb\": \"<integer>\"\n      },\n      \"fastId\": \"disabled\",\n      \"protectedModePinHex\": \"a2Bc6f15\",\n      \"receiveSensitivityDbm\": \"<integer>\",\n      \"tagAuthentication\": {\n        \"messageHex\": \"04C21F5F1EAB\"\n      },\n      \"tagMemoryReads\": [\n        {\n          \"memoryBank\": \"user\",\n          \"wordOffset\": \"<integer>\",\n          \"wordCount\": \"<integer>\"\n        }\n      ],\n      \"tagAccessPasswordHex\": \"694717A6\",\n      \"tagAccessPasswordWriteHex\": \"        \",\n      \"tagSecurityModesWrite\": {\n        \"protected\": false,\n        \"shortRange\": false\n      }\n    }\n  ],\n  \"eventConfig\": {},\n  \"startTriggers\": [\n    {\n      \"gpiTransitionEvent\": {\n        \"gpi\": \"<integer>\",\n        \"transition\": \"low-to-high\"\n      }\n    }\n  ],\n  \"stopTriggers\": [\n    {\n      \"gpiTransitionEvent\": {\n        \"gpi\": \"<integer>\",\n        \"transition\": \"low-to-high\"\n      }\n    }\n  ]\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/profiles/inventory/presets/:presetId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"profiles",
+														"inventory",
+														"presets",
+														":presetId"
+													],
+													"variable": [
+														{
+															"key": "presetId",
+															"value": "1CqxdK02N7"
+														}
+													]
+												},
+												"description": "Creates or replaces a user-defined inventory preset.  Presets with names\nthat begin with 'default' or 'impinj' may not be created or replaced.\n"
+											},
+											"response": [
+												{
+													"name": "Created. The preset was successfully created.",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "application/json"
+															},
+															{
+																"description": "Added as a part of security scheme: basic",
+																"key": "Authorization",
+																"value": "Basic <credentials>"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"antennaConfigs\": [\n    {\n      \"antennaPort\": \"<integer>\",\n      \"transmitPowerCdbm\": \"<integer>\",\n      \"rfMode\": 2,\n      \"inventorySession\": \"<integer>\",\n      \"inventorySearchMode\": \"single-target-with-tagfocus\",\n      \"estimatedTagPopulation\": \"<integer>\",\n      \"antennaName\": \"uTCJVM-kIcZ\",\n      \"filtering\": {\n        \"filters\": [\n          {\n            \"action\": \"include\",\n            \"tagMemoryBank\": \"epc\",\n            \"bitOffset\": \"<integer>\",\n            \"mask\": \"adeECB596\",\n            \"maskLength\": \"<integer>\"\n          }\n        ],\n        \"filterLink\": \"union\",\n        \"filterVerification\": \"passive\"\n      },\n      \"powerSweeping\": {\n        \"minimumPowerCdbm\": \"<integer>\",\n        \"stepSizeCdb\": \"<integer>\"\n      },\n      \"fastId\": \"disabled\",\n      \"protectedModePinHex\": \"a2Bc6f15\",\n      \"receiveSensitivityDbm\": \"<integer>\",\n      \"tagAuthentication\": {\n        \"messageHex\": \"04C21F5F1EAB\"\n      },\n      \"tagMemoryReads\": [\n        {\n          \"memoryBank\": \"user\",\n          \"wordOffset\": \"<integer>\",\n          \"wordCount\": \"<integer>\"\n        }\n      ],\n      \"tagAccessPasswordHex\": \"694717A6\",\n      \"tagAccessPasswordWriteHex\": \"        \",\n      \"tagSecurityModesWrite\": {\n        \"protected\": false,\n        \"shortRange\": false\n      }\n    }\n  ],\n  \"eventConfig\": {},\n  \"startTriggers\": [\n    {\n      \"gpiTransitionEvent\": {\n        \"gpi\": \"<integer>\",\n        \"transition\": \"low-to-high\"\n      }\n    }\n  ],\n  \"stopTriggers\": [\n    {\n      \"gpiTransitionEvent\": {\n        \"gpi\": \"<integer>\",\n        \"transition\": \"low-to-high\"\n      }\n    }\n  ]\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/profiles/inventory/presets/:presetId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"profiles",
+																"inventory",
+																"presets",
+																":presetId"
+															],
+															"variable": [
+																{
+																	"key": "presetId"
+																}
+															]
+														}
+													},
+													"status": "Created",
+													"code": 201,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												},
+												{
+													"name": "No Content. The preset was successfully replaced.",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"description": "Added as a part of security scheme: basic",
+																"key": "Authorization",
+																"value": "Basic <credentials>"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"antennaConfigs\": [\n    {\n      \"antennaPort\": \"<integer>\",\n      \"transmitPowerCdbm\": \"<integer>\",\n      \"rfMode\": 2,\n      \"inventorySession\": \"<integer>\",\n      \"inventorySearchMode\": \"single-target-with-tagfocus\",\n      \"estimatedTagPopulation\": \"<integer>\",\n      \"antennaName\": \"uTCJVM-kIcZ\",\n      \"filtering\": {\n        \"filters\": [\n          {\n            \"action\": \"include\",\n            \"tagMemoryBank\": \"epc\",\n            \"bitOffset\": \"<integer>\",\n            \"mask\": \"adeECB596\",\n            \"maskLength\": \"<integer>\"\n          }\n        ],\n        \"filterLink\": \"union\",\n        \"filterVerification\": \"passive\"\n      },\n      \"powerSweeping\": {\n        \"minimumPowerCdbm\": \"<integer>\",\n        \"stepSizeCdb\": \"<integer>\"\n      },\n      \"fastId\": \"disabled\",\n      \"protectedModePinHex\": \"a2Bc6f15\",\n      \"receiveSensitivityDbm\": \"<integer>\",\n      \"tagAuthentication\": {\n        \"messageHex\": \"04C21F5F1EAB\"\n      },\n      \"tagMemoryReads\": [\n        {\n          \"memoryBank\": \"user\",\n          \"wordOffset\": \"<integer>\",\n          \"wordCount\": \"<integer>\"\n        }\n      ],\n      \"tagAccessPasswordHex\": \"694717A6\",\n      \"tagAccessPasswordWriteHex\": \"        \",\n      \"tagSecurityModesWrite\": {\n        \"protected\": false,\n        \"shortRange\": false\n      }\n    }\n  ],\n  \"eventConfig\": {},\n  \"startTriggers\": [\n    {\n      \"gpiTransitionEvent\": {\n        \"gpi\": \"<integer>\",\n        \"transition\": \"low-to-high\"\n      }\n    }\n  ],\n  \"stopTriggers\": [\n    {\n      \"gpiTransitionEvent\": {\n        \"gpi\": \"<integer>\",\n        \"transition\": \"low-to-high\"\n      }\n    }\n  ]\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/profiles/inventory/presets/:presetId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"profiles",
+																"inventory",
+																"presets",
+																":presetId"
+															],
+															"variable": [
+																{
+																	"key": "presetId"
+																}
+															]
+														}
+													},
+													"status": "No Content",
+													"code": 204,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "Bad Request. The request body contained an invalid profile configuration.",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "application/json"
+															},
+															{
+																"description": "Added as a part of security scheme: basic",
+																"key": "Authorization",
+																"value": "Basic <credentials>"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"antennaConfigs\": [\n    {\n      \"antennaPort\": \"<integer>\",\n      \"transmitPowerCdbm\": \"<integer>\",\n      \"rfMode\": 2,\n      \"inventorySession\": \"<integer>\",\n      \"inventorySearchMode\": \"single-target-with-tagfocus\",\n      \"estimatedTagPopulation\": \"<integer>\",\n      \"antennaName\": \"uTCJVM-kIcZ\",\n      \"filtering\": {\n        \"filters\": [\n          {\n            \"action\": \"include\",\n            \"tagMemoryBank\": \"epc\",\n            \"bitOffset\": \"<integer>\",\n            \"mask\": \"adeECB596\",\n            \"maskLength\": \"<integer>\"\n          }\n        ],\n        \"filterLink\": \"union\",\n        \"filterVerification\": \"passive\"\n      },\n      \"powerSweeping\": {\n        \"minimumPowerCdbm\": \"<integer>\",\n        \"stepSizeCdb\": \"<integer>\"\n      },\n      \"fastId\": \"disabled\",\n      \"protectedModePinHex\": \"a2Bc6f15\",\n      \"receiveSensitivityDbm\": \"<integer>\",\n      \"tagAuthentication\": {\n        \"messageHex\": \"04C21F5F1EAB\"\n      },\n      \"tagMemoryReads\": [\n        {\n          \"memoryBank\": \"user\",\n          \"wordOffset\": \"<integer>\",\n          \"wordCount\": \"<integer>\"\n        }\n      ],\n      \"tagAccessPasswordHex\": \"694717A6\",\n      \"tagAccessPasswordWriteHex\": \"        \",\n      \"tagSecurityModesWrite\": {\n        \"protected\": false,\n        \"shortRange\": false\n      }\n    }\n  ],\n  \"eventConfig\": {},\n  \"startTriggers\": [\n    {\n      \"gpiTransitionEvent\": {\n        \"gpi\": \"<integer>\",\n        \"transition\": \"low-to-high\"\n      }\n    }\n  ],\n  \"stopTriggers\": [\n    {\n      \"gpiTransitionEvent\": {\n        \"gpi\": \"<integer>\",\n        \"transition\": \"low-to-high\"\n      }\n    }\n  ]\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/profiles/inventory/presets/:presetId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"profiles",
+																"inventory",
+																"presets",
+																":presetId"
+															],
+															"variable": [
+																{
+																	"key": "presetId"
+																}
+															]
+														}
+													},
+													"status": "Bad Request",
+													"code": 400,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"message\": \"<string>\",\n  \"invalidPropertyId\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+												},
+												{
+													"name": "Forbidden. Preset ID is invalid.",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "application/json"
+															},
+															{
+																"description": "Added as a part of security scheme: basic",
+																"key": "Authorization",
+																"value": "Basic <credentials>"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"antennaConfigs\": [\n    {\n      \"antennaPort\": \"<integer>\",\n      \"transmitPowerCdbm\": \"<integer>\",\n      \"rfMode\": 2,\n      \"inventorySession\": \"<integer>\",\n      \"inventorySearchMode\": \"single-target-with-tagfocus\",\n      \"estimatedTagPopulation\": \"<integer>\",\n      \"antennaName\": \"uTCJVM-kIcZ\",\n      \"filtering\": {\n        \"filters\": [\n          {\n            \"action\": \"include\",\n            \"tagMemoryBank\": \"epc\",\n            \"bitOffset\": \"<integer>\",\n            \"mask\": \"adeECB596\",\n            \"maskLength\": \"<integer>\"\n          }\n        ],\n        \"filterLink\": \"union\",\n        \"filterVerification\": \"passive\"\n      },\n      \"powerSweeping\": {\n        \"minimumPowerCdbm\": \"<integer>\",\n        \"stepSizeCdb\": \"<integer>\"\n      },\n      \"fastId\": \"disabled\",\n      \"protectedModePinHex\": \"a2Bc6f15\",\n      \"receiveSensitivityDbm\": \"<integer>\",\n      \"tagAuthentication\": {\n        \"messageHex\": \"04C21F5F1EAB\"\n      },\n      \"tagMemoryReads\": [\n        {\n          \"memoryBank\": \"user\",\n          \"wordOffset\": \"<integer>\",\n          \"wordCount\": \"<integer>\"\n        }\n      ],\n      \"tagAccessPasswordHex\": \"694717A6\",\n      \"tagAccessPasswordWriteHex\": \"        \",\n      \"tagSecurityModesWrite\": {\n        \"protected\": false,\n        \"shortRange\": false\n      }\n    }\n  ],\n  \"eventConfig\": {},\n  \"startTriggers\": [\n    {\n      \"gpiTransitionEvent\": {\n        \"gpi\": \"<integer>\",\n        \"transition\": \"low-to-high\"\n      }\n    }\n  ],\n  \"stopTriggers\": [\n    {\n      \"gpiTransitionEvent\": {\n        \"gpi\": \"<integer>\",\n        \"transition\": \"low-to-high\"\n      }\n    }\n  ]\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/profiles/inventory/presets/:presetId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"profiles",
+																"inventory",
+																"presets",
+																":presetId"
+															],
+															"variable": [
+																{
+																	"key": "presetId"
+																}
+															]
+														}
+													},
+													"status": "Forbidden",
+													"code": 403,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"message\": \"<string>\",\n  \"invalidPropertyId\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+												},
+												{
+													"name": "Conflict. The preset is running and cannot be modified.",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "application/json"
+															},
+															{
+																"description": "Added as a part of security scheme: basic",
+																"key": "Authorization",
+																"value": "Basic <credentials>"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"antennaConfigs\": [\n    {\n      \"antennaPort\": \"<integer>\",\n      \"transmitPowerCdbm\": \"<integer>\",\n      \"rfMode\": 2,\n      \"inventorySession\": \"<integer>\",\n      \"inventorySearchMode\": \"single-target-with-tagfocus\",\n      \"estimatedTagPopulation\": \"<integer>\",\n      \"antennaName\": \"uTCJVM-kIcZ\",\n      \"filtering\": {\n        \"filters\": [\n          {\n            \"action\": \"include\",\n            \"tagMemoryBank\": \"epc\",\n            \"bitOffset\": \"<integer>\",\n            \"mask\": \"adeECB596\",\n            \"maskLength\": \"<integer>\"\n          }\n        ],\n        \"filterLink\": \"union\",\n        \"filterVerification\": \"passive\"\n      },\n      \"powerSweeping\": {\n        \"minimumPowerCdbm\": \"<integer>\",\n        \"stepSizeCdb\": \"<integer>\"\n      },\n      \"fastId\": \"disabled\",\n      \"protectedModePinHex\": \"a2Bc6f15\",\n      \"receiveSensitivityDbm\": \"<integer>\",\n      \"tagAuthentication\": {\n        \"messageHex\": \"04C21F5F1EAB\"\n      },\n      \"tagMemoryReads\": [\n        {\n          \"memoryBank\": \"user\",\n          \"wordOffset\": \"<integer>\",\n          \"wordCount\": \"<integer>\"\n        }\n      ],\n      \"tagAccessPasswordHex\": \"694717A6\",\n      \"tagAccessPasswordWriteHex\": \"        \",\n      \"tagSecurityModesWrite\": {\n        \"protected\": false,\n        \"shortRange\": false\n      }\n    }\n  ],\n  \"eventConfig\": {},\n  \"startTriggers\": [\n    {\n      \"gpiTransitionEvent\": {\n        \"gpi\": \"<integer>\",\n        \"transition\": \"low-to-high\"\n      }\n    }\n  ],\n  \"stopTriggers\": [\n    {\n      \"gpiTransitionEvent\": {\n        \"gpi\": \"<integer>\",\n        \"transition\": \"low-to-high\"\n      }\n    }\n  ]\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/profiles/inventory/presets/:presetId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"profiles",
+																"inventory",
+																"presets",
+																":presetId"
+															],
+															"variable": [
+																{
+																	"key": "presetId"
+																}
+															]
+														}
+													},
+													"status": "Conflict",
+													"code": 409,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"message\": \"<string>\",\n  \"invalidPropertyId\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+												}
+											]
+										},
+										{
+											"name": "Delete inventory preset",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/profiles/inventory/presets/:presetId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"profiles",
+														"inventory",
+														"presets",
+														":presetId"
+													],
+													"variable": [
+														{
+															"key": "presetId",
+															"value": "l6fi"
+														}
+													]
+												},
+												"description": "Removes a user-defined settings preset for executing inventory."
+											},
+											"response": [
+												{
+													"name": "No Content. The preset was deleted from the reader.",
+													"originalRequest": {
+														"method": "DELETE",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: basic",
+																"key": "Authorization",
+																"value": "Basic <credentials>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/profiles/inventory/presets/:presetId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"profiles",
+																"inventory",
+																"presets",
+																":presetId"
+															],
+															"variable": [
+																{
+																	"key": "presetId"
+																}
+															]
+														}
+													},
+													"status": "No Content",
+													"code": 204,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "Forbidden. This preset is provided by the reader and cannot be deleted.",
+													"originalRequest": {
+														"method": "DELETE",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															},
+															{
+																"description": "Added as a part of security scheme: basic",
+																"key": "Authorization",
+																"value": "Basic <credentials>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/profiles/inventory/presets/:presetId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"profiles",
+																"inventory",
+																"presets",
+																":presetId"
+															],
+															"variable": [
+																{
+																	"key": "presetId"
+																}
+															]
+														}
+													},
+													"status": "Forbidden",
+													"code": 403,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"message\": \"<string>\",\n  \"invalidPropertyId\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+												},
+												{
+													"name": "Not Found. The specified preset was not found on the system.",
+													"originalRequest": {
+														"method": "DELETE",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															},
+															{
+																"description": "Added as a part of security scheme: basic",
+																"key": "Authorization",
+																"value": "Basic <credentials>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/profiles/inventory/presets/:presetId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"profiles",
+																"inventory",
+																"presets",
+																":presetId"
+															],
+															"variable": [
+																{
+																	"key": "presetId"
+																}
+															]
+														}
+													},
+													"status": "Not Found",
+													"code": 404,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"message\": \"<string>\",\n  \"invalidPropertyId\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+												},
+												{
+													"name": "Conflict. The preset is running and cannot be modified.",
+													"originalRequest": {
+														"method": "DELETE",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															},
+															{
+																"description": "Added as a part of security scheme: basic",
+																"key": "Authorization",
+																"value": "Basic <credentials>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/profiles/inventory/presets/:presetId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"profiles",
+																"inventory",
+																"presets",
+																":presetId"
+															],
+															"variable": [
+																{
+																	"key": "presetId"
+																}
+															]
+														}
+													},
+													"status": "Conflict",
+													"code": 409,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"message\": \"<string>\",\n  \"invalidPropertyId\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "Retrieve inventory presets",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/profiles/inventory/presets",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"profiles",
+												"inventory",
+												"presets"
+											]
+										},
+										"description": "Retrieves the available presets for running inventory."
+									},
+									"response": [
+										{
+											"name": "OK. The list of presets for this profile.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"description": "Added as a part of security scheme: basic",
+														"key": "Authorization",
+														"value": "Basic <credentials>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/profiles/inventory/presets",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"profiles",
+														"inventory",
+														"presets"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  \"YWIn\",\n  \"D3IZbB9zADF\"\n]"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Retrieve profiles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/profiles",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profiles"
+							]
+						},
+						"description": "Retrieves the profiles (e.g. inventory, location, and direction) supported by this reader."
+					},
+					"response": [
+						{
+							"name": "OK.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: basic",
+										"key": "Authorization",
+										"value": "Basic <credentials>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/profiles",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"profiles"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  \"<string>\"\n]"
+						},
+						{
+							"name": "An internal error occurred.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: basic",
+										"key": "Authorization",
+										"value": "Basic <credentials>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/profiles",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"profiles"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"<string>\",\n  \"invalidPropertyId\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "device",
+			"item": [
+				{
+					"name": "gpos",
+					"item": [
+						{
+							"name": "Retrieve GPO configurations.",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/device/gpos",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"device",
+										"gpos"
+									]
+								},
+								"description": "Retrieves the GPO configurations of the reader.\n"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/device/gpos",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"device",
+												"gpos"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"gpoConfigurations\": [\n    {\n      \"gpo\": \"<integer>\",\n      \"state\": \"high\"\n    },\n    {\n      \"gpo\": \"<integer>\",\n      \"state\": \"low\"\n    },\n    {\n      \"gpo\": \"<integer>\",\n      \"state\": \"high\"\n    }\n  ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Update GPO configurations.",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"gpoConfigurations\": [\n    {\n      \"gpo\": \"<integer>\",\n      \"state\": \"high\"\n    },\n    {\n      \"gpo\": \"<integer>\",\n      \"state\": \"low\"\n    },\n    {\n      \"gpo\": \"<integer>\",\n      \"state\": \"high\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/device/gpos",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"device",
+										"gpos"
+									]
+								},
+								"description": "Updates the GPO configurations of the reader.\nIf no configuration is provided for a GPO then the existing configuration will be used.\n"
+							},
+							"response": [
+								{
+									"name": "No Content.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"gpoConfigurations\": [\n    {\n      \"gpo\": \"<integer>\",\n      \"state\": \"high\"\n    },\n    {\n      \"gpo\": \"<integer>\",\n      \"state\": \"low\"\n    },\n    {\n      \"gpo\": \"<integer>\",\n      \"state\": \"high\"\n    }\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/device/gpos",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"device",
+												"gpos"
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad request. Invalid GPO configurations.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"gpoConfigurations\": [\n    {\n      \"gpo\": \"<integer>\",\n      \"state\": \"high\"\n    },\n    {\n      \"gpo\": \"<integer>\",\n      \"state\": \"low\"\n    },\n    {\n      \"gpo\": \"<integer>\",\n      \"state\": \"high\"\n    }\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/device/gpos",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"device",
+												"gpos"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"<string>\",\n  \"invalidPropertyId\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "system",
+			"item": [
+				{
+					"name": "access",
+					"item": [
+						{
+							"name": "authentication",
+							"item": [
+								{
+									"name": "Retrieve the reader's authentication configuration.",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/system/access/authentication",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"system",
+												"access",
+												"authentication"
+											]
+										},
+										"description": "Retrieves the reader's authentication configuration."
+									},
+									"response": [
+										{
+											"name": "OK.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"description": "Added as a part of security scheme: basic",
+														"key": "Authorization",
+														"value": "Basic <credentials>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/system/access/authentication",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"system",
+														"access",
+														"authentication"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"authType\": \"basic\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Update the reader's authentication configuration.",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"authType\": \"basic\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/system/access/authentication",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"system",
+												"access",
+												"authentication"
+											]
+										},
+										"description": "Updates the reader's authentication configuration."
+									},
+									"response": [
+										{
+											"name": "No Content. The authentication configuration has been updated successfully.",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"description": "Added as a part of security scheme: basic",
+														"key": "Authorization",
+														"value": "Basic <credentials>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"authType\": \"basic\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/system/access/authentication",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"system",
+														"access",
+														"authentication"
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Bad Request. The request body contained an invalid configuration.",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"description": "Added as a part of security scheme: basic",
+														"key": "Authorization",
+														"value": "Basic <credentials>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"authType\": \"basic\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/system/access/authentication",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"system",
+														"access",
+														"authentication"
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"<string>\",\n  \"invalidPropertyId\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "users",
+							"item": [
+								{
+									"name": "{userId}",
+									"item": [
+										{
+											"name": "password",
+											"item": [
+												{
+													"name": "Update the password for the specified user.",
+													"request": {
+														"method": "PUT",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"currentPassword\": \"<string>\",\n  \"newPassword\": \"<string>\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/system/access/users/:userId/password",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"system",
+																"access",
+																"users",
+																":userId",
+																"password"
+															],
+															"variable": [
+																{
+																	"key": "userId",
+																	"value": "<integer>"
+																}
+															]
+														},
+														"description": "Updates the password for the specified user."
+													},
+													"response": [
+														{
+															"name": "No Content. The password was updated successfully.",
+															"originalRequest": {
+																"method": "PUT",
+																"header": [
+																	{
+																		"key": "Content-Type",
+																		"value": "application/json"
+																	},
+																	{
+																		"description": "Added as a part of security scheme: basic",
+																		"key": "Authorization",
+																		"value": "Basic <credentials>"
+																	}
+																],
+																"body": {
+																	"mode": "raw",
+																	"raw": "{\n  \"currentPassword\": \"<string>\",\n  \"newPassword\": \"<string>\"\n}",
+																	"options": {
+																		"raw": {
+																			"headerFamily": "json",
+																			"language": "json"
+																		}
+																	}
+																},
+																"url": {
+																	"raw": "{{baseUrl}}/system/access/users/:userId/password",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"system",
+																		"access",
+																		"users",
+																		":userId",
+																		"password"
+																	],
+																	"variable": [
+																		{
+																			"key": "userId"
+																		}
+																	]
+																}
+															},
+															"status": "No Content",
+															"code": 204,
+															"_postman_previewlanguage": "text",
+															"header": [],
+															"cookie": [],
+															"body": ""
+														},
+														{
+															"name": "Bad Request. An invalid request was received.",
+															"originalRequest": {
+																"method": "PUT",
+																"header": [
+																	{
+																		"key": "Content-Type",
+																		"value": "application/json"
+																	},
+																	{
+																		"key": "Accept",
+																		"value": "application/json"
+																	},
+																	{
+																		"description": "Added as a part of security scheme: basic",
+																		"key": "Authorization",
+																		"value": "Basic <credentials>"
+																	}
+																],
+																"body": {
+																	"mode": "raw",
+																	"raw": "{\n  \"currentPassword\": \"<string>\",\n  \"newPassword\": \"<string>\"\n}",
+																	"options": {
+																		"raw": {
+																			"headerFamily": "json",
+																			"language": "json"
+																		}
+																	}
+																},
+																"url": {
+																	"raw": "{{baseUrl}}/system/access/users/:userId/password",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"system",
+																		"access",
+																		"users",
+																		":userId",
+																		"password"
+																	],
+																	"variable": [
+																		{
+																			"key": "userId"
+																		}
+																	]
+																}
+															},
+															"status": "Bad Request",
+															"code": 400,
+															"_postman_previewlanguage": "json",
+															"header": [
+																{
+																	"key": "Content-Type",
+																	"value": "application/json"
+																}
+															],
+															"cookie": [],
+															"body": "{\n  \"message\": \"<string>\",\n  \"invalidPropertyId\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+														},
+														{
+															"name": "Not found. Could not find a user with the specified userId.",
+															"originalRequest": {
+																"method": "PUT",
+																"header": [
+																	{
+																		"key": "Content-Type",
+																		"value": "application/json"
+																	},
+																	{
+																		"key": "Accept",
+																		"value": "application/json"
+																	},
+																	{
+																		"description": "Added as a part of security scheme: basic",
+																		"key": "Authorization",
+																		"value": "Basic <credentials>"
+																	}
+																],
+																"body": {
+																	"mode": "raw",
+																	"raw": "{\n  \"currentPassword\": \"<string>\",\n  \"newPassword\": \"<string>\"\n}",
+																	"options": {
+																		"raw": {
+																			"headerFamily": "json",
+																			"language": "json"
+																		}
+																	}
+																},
+																"url": {
+																	"raw": "{{baseUrl}}/system/access/users/:userId/password",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"system",
+																		"access",
+																		"users",
+																		":userId",
+																		"password"
+																	],
+																	"variable": [
+																		{
+																			"key": "userId"
+																		}
+																	]
+																}
+															},
+															"status": "Not Found",
+															"code": 404,
+															"_postman_previewlanguage": "json",
+															"header": [
+																{
+																	"key": "Content-Type",
+																	"value": "application/json"
+																}
+															],
+															"cookie": [],
+															"body": "{\n  \"message\": \"<string>\",\n  \"invalidPropertyId\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "Retrieve the list of users.",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/system/access/users",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"system",
+												"access",
+												"users"
+											]
+										},
+										"description": "Retrieves the list of users that can access reader.\n"
+									},
+									"response": [
+										{
+											"name": "OK.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"description": "Added as a part of security scheme: basic",
+														"key": "Authorization",
+														"value": "Basic <credentials>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/system/access/users",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"system",
+														"access",
+														"users"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"userId\": \"<integer>\",\n    \"username\": \"<string>\"\n  },\n  {\n    \"userId\": \"<integer>\",\n    \"username\": \"<string>\"\n  }\n]"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "reboot",
+					"item": [
+						{
+							"name": "Reboot the system.",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/system/reboot",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"system",
+										"reboot"
+									]
+								},
+								"description": "A call to this endpoint will cause the system to reboot. Once this request is issued, subsequent calls to\nany endpoint will fail until the system is again available to service requests.\n\nIf an upgrade has been installed on the system, the reader will boot into the newly installed firmware image.\n"
+							},
+							"response": [
+								{
+									"name": "Accepted. The system has begun the shutdown and startup process.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/system/reboot",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"system",
+												"reboot"
+											]
+										}
+									},
+									"status": "Accepted",
+									"code": 202,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"<string>\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Retrieve details about the reader hardware.",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/system",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"system"
+							]
+						},
+						"description": "Retrieve details about the reader hardware."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: basic",
+										"key": "Authorization",
+										"value": "Basic <credentials>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/system",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"system"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"productModel\": \"<string>\",\n  \"manufacturer\": \"<string>\",\n  \"productDescription\": \"<string>\",\n  \"productSku\": \"<string>\",\n  \"productHla\": \"<string>\",\n  \"pcba\": \"<string>\",\n  \"serialNumber\": \"<string>\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "{{basicAuthUsername}}",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "{{basicAuthPassword}}",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/api/v1"
+		}
+	]
+}
