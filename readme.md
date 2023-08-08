@@ -72,8 +72,6 @@ curl --location 'http://Lector/api/v1/status' \
 
 Es posible usar HTTPS, pero se deben configurar los certificados SSL.
 
-En el siguente video se muestra como usar la collecion de postman para iniciar y detener el servicio.
-
 Este es un ejemplo de como llegan los datos. Es un arreglo de objetos json donde cada objeto es una etiqueta leida. 
 
 ````
@@ -114,3 +112,4 @@ Este es un ejemplo de como llegan los datos. Es un arreglo de objetos json donde
 ]
 ````
 
+## En el siguente video se muestra como usar la colleción de postman para iniciar y detener el servicio.
