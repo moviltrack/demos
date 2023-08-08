@@ -114,7 +114,7 @@ Este es un ejemplo de como llegan los datos. Es un arreglo de objetos json donde
 
 ## En el siguente video se muestra como usar la colleción de postman para iniciar y detener el servicio.
 
-[https://youtu.be/Nu_nrxj5Go4](https://youtu.be/Nu_nrxj5Go4)
+[https://youtu.be/7u4C_Z2RLhY](https://youtu.be/7u4C_Z2RLhY)
 
 
 ## Documentación del lector
